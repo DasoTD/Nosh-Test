@@ -28,6 +28,12 @@ module.exports = async (req, res, next) => {
         `Failed to authenticate user`
       );
     }
+
+    if (user.status === "BLOCKED") {
+      return res.json(
+        `Your account has been blocked`
+      );
+    }
     req.user = user;
     next();
   } catch (error) {
